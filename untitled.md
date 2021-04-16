@@ -25,5 +25,46 @@ Cloud Computing Advantages:
 * **Geo-distribution**: Applications and data can be deployed to regional datacenters around the globe, so your customers always have the best performance in their region.
 * **Disaster recovery**: By taking advantage of cloud-based backup services, data replication, and geo-distribution, you can deploy your applications with the confidence that comes from knowing that your data is safe in the event that disaster should occur.
 
+Cloud Service Models
 
+| **IaaS** | This cloud service model is the closest to managing physical servers. A cloud provider keeps the hardware up to date, but operating system maintenance and network configuration is left to the cloud tenant. For example, Azure virtual machines are fully operational virtual compute devices running in Microsoft's datacenters. An advantage of this cloud service model is rapid deployment of new compute devices. Setting up a new virtual machine is considerably faster than procuring, installing, and configuring a physical server. |
+| :--- | :--- |
+
+
+| **PaaS** | This cloud service model is a managed hosting environment. The cloud provider manages the virtual machines and networking resources, and the cloud tenant deploys their applications into the managed hosting environment. For example, Azure App Services provides a managed hosting environment where developers can upload their web applications without having to deal with the physical hardware and software requirements. |
+| :--- | :--- |
+
+
+| **SaaS** | In this cloud service model, the cloud provider manages all aspects of the application environment, such as virtual machines, networking resources, data storage, and applications. The cloud tenant only needs to provide their data to the application managed by the cloud provider. For example, Office 365 provides a fully working version of Office that runs in the cloud. All that you need to do is create your content, and Office 365 takes care of everything else. |
+| :--- | :--- |
+
+
+The following illustration demonstrates the services that might run in each of the cloud service models.
+
+[![Illustration that shows the services separated by cloud service models.](https://docs.microsoft.com/en-us/learn/azure-fundamentals/intro-to-azure-fundamentals/media/iaas-paas-saas.png)](https://docs.microsoft.com/en-us/learn/azure-fundamentals/intro-to-azure-fundamentals/media/iaas-paas-saas-expanded.png#lightbox)
+
+The following chart illustrates the various levels of responsibility between a cloud provider and a cloud tenant.
+
+![Chart that shows the shared responsibilities for cloud providers and cloud tenants.](https://docs.microsoft.com/en-us/learn/azure-fundamentals/intro-to-azure-fundamentals/media/shared-responsibility.png)
+
+### What is serverless computing? <a id="what-is-serverless-computing"></a>
+
+Overlapping with PaaS, serverless computing enables developers to build applications faster by eliminating the need for them to manage infrastructure. With serverless applications, the cloud service provider automatically provisions, scales, and manages the infrastructure required to run the code. Serverless architectures are highly scalable and event-driven. They use resources only when a specific function or trigger occurs.
+
+Note that servers are still running the code. The serverless name comes from the fact that the tasks associated with infrastructure provisioning and management are invisible to the developer. This approach enables developers to increase their focus on the business logic and deliver more value to the core of the business. Serverless computing helps teams increase their productivity and bring products to market faster. It allows organizations to better optimize resources and stay focused on innovation.
+
+### What are public, private, and hybrid clouds? <a id="what-are-public-private-and-hybrid-clouds"></a>
+
+There are three deployment models for cloud computing: _public cloud_, _private cloud_, and _hybrid cloud_. Each deployment model has different aspects that you should consider as you migrate to the cloud.
+
+|  |  |
+| :--- | :--- |
+| Deployment model | Description |
+| **Public cloud** | Services are offered over the public internet and available to anyone who wants to purchase them. Cloud resources like servers and storage are owned and operated by a third-party cloud service provider and delivered over the internet. |
+| **Private cloud** | Computing resources are used exclusively by users from one business or organization. A private cloud can be physically located at your organization's on-site datacenter. It also can be hosted by a third-party service provider. |
+| **Hybrid cloud** | This computing environment combines a public cloud and a private cloud by allowing data and applications to be shared between them. |
+
+The following image illustrates several of the cloud computing concepts that are presented in this unit. In this example, several factors are demonstrated when you're considering where to deploy a database server in a hybrid cloud environment. As your resources move from on-premises to off-premises, your costs are reduced, and your administration requirements decrease.
+
+![Illustration showing the cloud computing continuum.](https://docs.microsoft.com/en-us/learn/azure-fundamentals/intro-to-azure-fundamentals/media/cloud-computing-continuum.png)
 
