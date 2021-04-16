@@ -68,3 +68,13 @@ The following image illustrates several of the cloud computing concepts that are
 
 ![Illustration showing the cloud computing continuum.](https://docs.microsoft.com/en-us/learn/azure-fundamentals/intro-to-azure-fundamentals/media/cloud-computing-continuum.png)
 
+Azure Portal
+
+The Azure portal is a web-based, unified console that provides an alternative to command-line tools.
+
+* Build, manage, and monitor everything from simple web apps to complex cloud deployments.
+* Create custom dashboards for an organized view of resources.
+* Configure accessibility options for an optimal experience.
+
+
+
