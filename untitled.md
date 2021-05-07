@@ -269,5 +269,81 @@ DevOps brings together people, processes, and technology by automating software 
 | Azure DevOps | Use development collaboration tools such as high-performance pipelines, free private Git repositories, configurable Kanban boards, and extensive automated and cloud-based load testing. Formerly known as Visual Studio Team Services. |
 | Azure DevTest Labs | Quickly create on-demand Windows and Linux environments to test or demo applications directly from deployment pipelines. |
 
+### Azure Accounts
 
+### What is the Azure free account? <a id="what-is-the-azure-free-account"></a>
+
+The Azure free account includes:
+
+* Free access to popular Azure products for 12 months.
+* A credit to spend for the first 30 days.
+* Access to more than 25 products that are always free.
+
+The Azure free account is an excellent way for new users to get started and explore. To sign up, you need a phone number, a credit card, and a Microsoft or GitHub account. The credit card information is used for identity verification only. You won't be charged for any services until you upgrade to a paid subscription.
+
+### What is the Learn sandbox? <a id="what-is-the-learn-sandbox"></a>
+
+Many of the Learn exercises use a technology called the sandbox, which creates a temporary subscription that's added to your Azure account. This temporary subscription allows you to create Azure resources for the duration of a Learn module. Learn automatically cleans up the temporary resources for you after you've completed the module.
+
+When you're completing a Learn module, you're welcome to use your personal subscription to complete the exercises in a module. The sandbox is the preferred method to use though, because it allows you to create and test Azure resources at no cost to you.
+
+## Describe the benefits of cloud computing
+
+### What are some cloud computing advantages? <a id="what-are-some-cloud-computing-advantages"></a>
+
+There are several advantages that a cloud environment has over a physical environment that Tailwind Traders can use following its migration to Azure.
+
+* **High availability**: Depending on the service-level agreement \(SLA\) that you choose, your cloud-based apps can provide a continuous user experience with no apparent downtime, even when things go wrong.
+* **Scalability**: Apps in the cloud can scale _vertically_ and _horizontally_:
+  * Scale vertically to increase compute capacity by adding RAM or CPUs to a virtual machine.
+  * Scaling horizontally increases compute capacity by adding instances of resources, such as adding VMs to the configuration.
+* **Elasticity**: You can configure cloud-based apps to take advantage of autoscaling, so your apps always have the resources they need.
+* **Agility**: Deploy and configure cloud-based resources quickly as your app requirements change.
+* **Geo-distribution**: You can deploy apps and data to regional datacenters around the globe, thereby ensuring that your customers always have the best performance in their region.
+* **Disaster recovery**: By taking advantage of cloud-based backup services, data replication, and geo-distribution, you can deploy your apps with the confidence that comes from knowing that your data is safe in the event of disaster.
+
+### Cloud computing is a consumption-based model <a id="cloud-computing-is-a-consumption-based-model"></a>
+
+Cloud service providers operate on a _consumption-based model_, which means that end users only pay for the resources that they use. Whatever they use is what they pay for.
+
+A consumption-based model has many benefits, including:
+
+* No upfront costs.
+* No need to purchase and manage costly infrastructure that users might not use to its fullest.
+* The ability to pay for additional resources when they are needed.
+* The ability to stop paying for resources that are no longer needed.
+
+### Capital expenses vs. operating expenses <a id="capital-expenses-vs-operating-expenses"></a>
+
+There are two different types of expenses that you should consider:
+
+* **Capital Expenditure \(CapEx\)** is the up-front spending of money on physical infrastructure, and then deducting that up-front expense over time. The up-front cost from CapEx has a value that reduces over time.
+* **Operational Expenditure \(OpEx\)** is spending money on services or products now, and being billed for them now. You can deduct this expense in the same year you spend it. There is no up-front cost, as you pay for a service or product as you use it.
+
+In other words, when Tailwind Traders owns its infrastructure, it buys equipment that goes onto its balance sheets as assets. Because a capital investment was made, accountants categorize this transaction as a CapEx. Over time, to account for the assets' limited useful lifespan, assets are depreciated or amortized.
+
+Cloud services, on the other hand, are categorized as an OpEx, because of their consumption model. There's no asset for Tailwind Traders to amortize, and its cloud service provider \(Azure\) manages the costs that are associated with the purchase and lifespan of the physical equipment. As a result, OpEx has a direct impact on net profit, taxable income, and the associated expenses on the balance sheet.
+
+To summarize, CapEx requires significant up-front financial costs, as well as ongoing maintenance and support expenditures. By contrast, OpEx is a consumption-based model, so Tailwind Traders is only responsible for the cost of the computing resources that it uses.
+
+## Overview of Azure subscriptions, management groups, and resources
+
+Completed100 XP
+
+* 2 minutes
+
+As part of your research for Tailwind Traders, you need to learn the organizing structure for resources in Azure, which has four levels: management groups, subscriptions, resource groups, and resources.
+
+The following image shows the top-down hierarchy of organization for these levels.
+
+[![Screenshot of the hierarchy for objects in Azure.](https://docs.microsoft.com/en-us/learn/azure-fundamentals/azure-architecture-fundamentals/media/hierarchy.png)](https://docs.microsoft.com/en-us/learn/azure-fundamentals/azure-architecture-fundamentals/media/hierarchy-expanded.png#lightbox)
+
+Having seen the top-down hierarchy of organization, let's describe each of those levels from the bottom up:
+
+* **Resources**: Resources are instances of services that you create, like virtual machines, storage, or SQL databases.
+* **Resource groups**: Resources are combined into resource groups, which act as a logical container into which Azure resources like web apps, databases, and storage accounts are deployed and managed.
+* **Subscriptions**: A subscription groups together user accounts and the resources that have been created by those user accounts. For each subscription, there are limits or quotas on the amount of resources that you can create and use. Organizations can use subscriptions to manage costs and the resources that are created by users, teams, or projects.
+* **Management groups**: These groups help you manage access, policy, and compliance for multiple subscriptions. All subscriptions in a management group automatically inherit the conditions applied to the management group.
+
+You'll examine each of these four organizational levels in the next few units.
 
