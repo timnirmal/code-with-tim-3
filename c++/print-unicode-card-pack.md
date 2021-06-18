@@ -18,7 +18,9 @@ int main() {
 }
 ```
 
-For print suits
+### For print suits
+
+[https://en.wikipedia.org/wiki/Playing\_cards\_in\_Unicode](https://en.wikipedia.org/wiki/Playing_cards_in_Unicode)
 
 | U+2660 | U+2665 | U+2666 | U+2663 |
 | :--- | :--- | :--- | :--- |
