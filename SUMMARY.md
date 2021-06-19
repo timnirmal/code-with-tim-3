@@ -8,4 +8,5 @@
 
 * [Print Unicode \(card pack\)](c++/print-unicode-card-pack.md)
 * [Array](c++/array.md)
+* [Duplicate finding algorithms](c++/duplicate-finding-algorithms.md)
 
