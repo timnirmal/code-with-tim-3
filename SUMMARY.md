@@ -10,3 +10,7 @@
 * [Array](c++/array.md)
 * [Duplicate finding algorithms](c++/duplicate-finding-algorithms.md)
 
+## Task
+
+* [Basic Maths](task/basic-maths.md)
+
