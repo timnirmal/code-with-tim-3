@@ -14,3 +14,11 @@
 
 * [Basic Maths](task/basic-maths.md)
 
+## Data Structures
+
+* [Stack](data-structures/stack.md)
+
+## Strings
+
+* [String Manipulation](strings/string-manipulation.md)
+
