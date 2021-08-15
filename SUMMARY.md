@@ -21,4 +21,5 @@
 ## Strings
 
 * [String Manipulation](strings/string-manipulation.md)
+* [C Strings](strings/c-strings.md)
 
