@@ -25,7 +25,7 @@ But we can use `strcpy()` function instead.
 
 We can use the `scanf()` function to read a string.
 
-The `scanf()` function reads the sequence of characters until it encounters whitespace \(space, newline, tab, etc.\).
+The `scanf()` function reads the sequence of characters until it encounters whitespace \(space, newline, tab, etc.\)
 
 {% tabs %}
 {% tab title="C++" %}
