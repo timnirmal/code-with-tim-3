@@ -25,7 +25,7 @@ But we can use `strcpy()` function instead.
 
 We can use the `scanf()` function to read a string.
 
-The `scanf()` function reads the sequence of characters until it encounters whitespace \(space, newline, tab, etc.\).
+The `scanf()` function reads the sequence of characters until it encounters whitespace \(space, newline, tab, etc.\)
 
 {% tabs %}
 {% tab title="C++" %}
@@ -52,6 +52,31 @@ int main () {
 ```
 {% endtab %}
 {% endtabs %}
+
+### Strings and Pointers <a id="pointers"></a>
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+int main () {
+    char name[] = "Harry Potter";
+
+    cout<< *name<<endl;
+    cout<< *(name+1)<<endl;
+    cout<< *(name+7)<<endl;
+
+    char *namePtr = "12345678";
+
+    cout<< *namePtr<<endl;
+    cout<< *(namePtr+1)<<endl;
+    cout<< *(namePtr+7)<<endl;
+}
+
+//Output:
+Hao128
+```
 
 
 
