@@ -185,3 +185,223 @@ int main()
 {% endtab %}
 {% endtabs %}
 
+## **Element access**
+
+### **at**
+
+**Parameter -** position of the character to return
+
+**Return value -** Reference to the requested character
+
+{% tabs %}
+{% tab title="C++" %}
+```cpp
+s = "abc";
+s.at(2) = 'x';
+//s -> abx
+//Execption Handeling included in
+```
+{% endtab %}
+
+{% tab title="Code" %}
+```cpp
+#include <stdexcept>
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main()
+{
+    string s;
+
+    s = "abc";
+    s.at(2) = 'x';
+    //s -> abx
+
+    //Ex 2 : Throws out_of_range if pos >= size().
+    try {
+        // This will throw since the requested offset is greater than the current size.
+        s.at(3) = 'x';
+    }
+    catch (out_of_range const& exc) {
+        cout << exc.what() << '\n';
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+### \[ \] Operator
+
+{% tabs %}
+{% tab title="C++" %}
+```cpp
+s[5] = '5';
+```
+{% endtab %}
+
+{% tab title="Code" %}
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    string const e("Exemplar");
+    for (unsigned i = e.length() - 1; i != 0; i/=2)
+        cout << e[i];
+    cout << '\n';
+    //Output -> rmx
+
+    // print as a C string -> output : Exemplar
+    const char* c = &e[0];
+    cout << c << '\n';
+
+    //Change the last character of s into a 'y'
+    string s("Exemplar ");
+    s[s.size()-1] = 'y'; // equivalent to s.back() = 'y';
+    cout << s << '\n';
+    //output -> Exemplary
+}
+```
+{% endtab %}
+{% endtabs %}
+
+### front\(\) & back\(\)
+
+{% tabs %}
+{% tab title="C++" %}
+```cpp
+s.front()
+s.back()
+```
+{% endtab %}
+
+{% tab title="Code" %}
+```cpp
+#include <iostream>
+#include <string>
+
+int main()
+{
+    {
+        std::string s("Exemplary");
+        char& f = s.front(); f = 'e';
+        //or
+        s.front()= 'e';
+        std::cout << s << '\n'; // "exemplary"
+    }
+
+    {
+        std::string const c("Exemplary");
+        char const& f = c.front();
+        std::cout << &f << '\n'; // "Exemplary"
+    }
+}
+```
+{% endtab %}
+{% endtabs %}
+
+## **Iterators**
+
+{% tabs %}
+{% tab title="begin" %}
+```cpp
+#include <string>
+#include <iostream>
+ 
+int main()
+{
+    std::string s("Exemplar");
+    *s.begin() = 'e';
+    std::cout << s <<'\n';
+ 
+    auto i = s.cbegin();
+    std::cout << *i << '\n';
+//  *i = 'E'; // error: i is a constant iterator
+}
+
+//Output : 
+//exemplar
+//e
+```
+{% endtab %}
+
+{% tab title="end" %}
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <string>
+ 
+int main()
+{
+    std::string s("Exemparl");
+    std::next_permutation(s.begin(), s.end());
+ 
+    std::string c;
+    std::copy(s.cbegin(), s.cend(), std::back_inserter(c));
+    std::cout << c <<'\n'; // "Exemplar"
+}
+
+//Output :
+//Exemplar
+```
+{% endtab %}
+
+{% tab title="rbegin" %}
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <string>
+ 
+int main()
+{
+    std::string s("Exemplar!");
+    *s.rbegin() = 'y';
+    std::cout << s << '\n'; // "Exemplary"
+ 
+    std::string c;
+    std::copy(s.crbegin(), s.crend(), std::back_inserter(c));
+    std::cout << c << '\n'; // "yralpmexE"
+}
+
+//Exemplary
+//yralpmexE
+```
+{% endtab %}
+
+{% tab title="rend" %}
+```cpp
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <string>
+ 
+int main()
+{
+  std::string s("A man, a plan, a canal: Panama");
+  {
+    std::string c;
+    std::copy(s.rbegin(), s.rend(), std::back_inserter(c));
+    std::cout << c <<'\n'; // "amanaP :lanac a ,nalp a ,nam A"
+  }
+ 
+  {
+    std::string c;
+    std::copy(s.crbegin(), s.crend(), std::back_inserter(c));
+    std::cout << c <<'\n'; // "amanaP :lanac a ,nalp a ,nam A"
+  }
+}
+
+//amanaP :lanac a ,nalp a ,nam A
+//amanaP :lanac a ,nalp a ,nam A
+```
+{% endtab %}
+{% endtabs %}
+
+
+
