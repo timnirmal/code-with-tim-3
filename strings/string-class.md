@@ -403,9 +403,85 @@ int main()
 {% endtab %}
 {% endtabs %}
 
-## Capacity / Size
+## Capacity / Size / Length
+
+| **Capacity** |  |
+| :--- | :--- |
+| [empty](https://en.cppreference.com/w/cpp/string/basic_string/empty) | checks whether the string is empty |
+| [size/length](https://en.cppreference.com/w/cpp/string/basic_string/size) | returns the number of characters |
+| [max\_size](https://en.cppreference.com/w/cpp/string/basic_string/max_size) | returns the maximum number of characters |
+| [reserve](https://en.cppreference.com/w/cpp/string/basic_string/reserve) | reserves storage |
+| [capacity](https://en.cppreference.com/w/cpp/string/basic_string/capacity) | returns the number of characters that can be held in currently allocated storage |
+| [shrink\_to\_fit](https://en.cppreference.com/w/cpp/string/basic_string/shrink_to_fit)\(C++11\) | reduces memory usage by freeing unused memory |
 
 ### empty\(\)
 
 check if the string is empty and return boolean.
+
+### Size / Length / Distance
+
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    std::string s("Exemplar!");
+    cout<<s.size()<<endl;
+    cout<<s.length()<<endl;
+    cout<<distance(s.begin(),s.end());
+
+    //Output -> 
+    //9
+    //9
+    //9
+
+
+    return 0;
+}
+```
+
+#### distance\(first,last\); 
+
+first - iterator pointing to the first element & last - iterator pointing to the end of the range
+
+### Max\_Size
+
+{% tabs %}
+{% tab title="C++" %}
+```cpp
+std::string s;
+    std::cout << "Maximum size of a string is " << s.max_size()
+    << " (pointer size: " << CHAR_BIT*sizeof(void*) << " bits)\n";
+
+//Output :
+//Maximum size of a string is 2147483647 (pointer size: 32 bits)
+```
+{% endtab %}
+
+{% tab title="Code" %}
+```cpp
+#include <iostream>
+#include <string>
+#include <climits>
+
+int main()
+{
+    std::string s;
+    std::cout << "Maximum size of a string is " << s.max_size()
+    << " (pointer size: " << CHAR_BIT*sizeof(void*)
+    << " bits)\n";
+}
+
+//Output :
+//Maximum size of a string is 2147483647 (pointer size: 32 bits)
+```
+{% endtab %}
+{% endtabs %}
+
+
 
