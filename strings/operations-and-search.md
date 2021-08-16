@@ -16,13 +16,19 @@
 | [replace](https://en.cppreference.com/w/cpp/string/basic_string/replace) | replaces specified portion of a string |
 | [substr](https://en.cppreference.com/w/cpp/string/basic_string/substr) | returns a substring |
 | [copy](https://en.cppreference.com/w/cpp/string/basic_string/copy) | copies characters |
-| [resize](https://en.cppreference.com/w/cpp/string/basic_string/resize) | changes the number of characters stored \(public member function\) |
-| [swap](https://en.cppreference.com/w/cpp/string/basic_string/swap) | swaps the contents \(public member function\) |
+| [resize](https://en.cppreference.com/w/cpp/string/basic_string/resize) | changes the number of characters stored |
+| [swap](https://en.cppreference.com/w/cpp/string/basic_string/swap) | swaps the contents |
+
+sss
+
 | **Search** |  |
-| [find](https://en.cppreference.com/w/cpp/string/basic_string/find) | find characters in the string \(public member function\) |
-| [rfind](https://en.cppreference.com/w/cpp/string/basic_string/rfind) | find the last occurrence of a substring \(public member function\) |
-| [find\_first\_of](https://en.cppreference.com/w/cpp/string/basic_string/find_first_of) | find first occurrence of characters \(public member function\) |
-| [find\_first\_not\_of](https://en.cppreference.com/w/cpp/string/basic_string/find_first_not_of) | find first absence of characters \(public member function\) |
-| [find\_last\_of](https://en.cppreference.com/w/cpp/string/basic_string/find_last_of) | find last occurrence of characters \(public member function\) |
-| [find\_last\_not\_of](https://en.cppreference.com/w/cpp/string/basic_string/find_last_not_of) | find last absence of characters \(public member function\) |
+| :--- | :--- |
+| [find](https://en.cppreference.com/w/cpp/string/basic_string/find) | find characters in the string |
+| [rfind](https://en.cppreference.com/w/cpp/string/basic_string/rfind) | find the last occurrence of a substring |
+| [find\_first\_of](https://en.cppreference.com/w/cpp/string/basic_string/find_first_of) | find first occurrence of characters |
+| [find\_first\_not\_of](https://en.cppreference.com/w/cpp/string/basic_string/find_first_not_of) | find first absence of characters |
+| [find\_last\_of](https://en.cppreference.com/w/cpp/string/basic_string/find_last_of) | find last occurrence of characters |
+| [find\_last\_not\_of](https://en.cppreference.com/w/cpp/string/basic_string/find_last_not_of) | find last absence of characters |
+
+
 
