@@ -1,6 +1,6 @@
 # String Class
 
-```text
+```cpp
 // string library
 #include <string>
 
@@ -10,7 +10,7 @@ cout << str;
 
 ### String Concatenation \(join\)
 
-```text
+```cpp
 string firstName = "Tim";
 string lastName = "Nirmal";
 string fullName = firstName + " " +lastName;
@@ -405,5 +405,7 @@ int main()
 
 ## Capacity / Size
 
+### empty\(\)
 
+check if the string is empty and return boolean.
 
