@@ -22,4 +22,10 @@
 
 * [String Manipulation](strings/string-manipulation.md)
 * [C Strings](strings/c-strings.md)
+* [String Class](strings/string-class.md)
+
+## Libraries
+
+* [Libraries](libraries/libraries.md)
+* [Standard Library](libraries/standard-library.md)
 
