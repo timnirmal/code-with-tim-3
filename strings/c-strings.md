@@ -32,7 +32,10 @@ The `scanf()` function reads the sequence of characters until it encounters whit
 ```cpp
     cin >> name;
     cout<<"Your name is "<< name;
-
+or
+    scanf("%s", name);
+    printf("Your name is %s.", name);
+    
 //Input : Thimira Nirmal
 Output : Your Name is Thimira
 ```
@@ -46,7 +49,9 @@ int main () {
     char name[20];
     cout <<"Enter name: ";
     cin >> name;
+    //scanf("%s", name);
     cout<<"Your name is "<< name;
+    //printf("Your name is %s.", name);
     return 0;
 }
 ```
@@ -77,6 +82,19 @@ int main () {
 //Output:
 Hao128
 ```
+
+
+
+* **strcpy\(str1, str2\)**: Copies string str2 into string str1.
+* **strcat\(str1, str2\)**: Concatenates \(joins\) string str2 onto the end of string str1.
+* **strlen\(str1\)**: Returns the length of string str1.
+* **strcmp\(str1, str2\)**: Returns 0 if str1 and str2 are the same; less than 0 if str1&lt;str2; greater than 0 if str1&gt;str2. \(compare\)
+* **strlwr\(\):** converts string to lowercase
+* **strupr\(\):** converts string to uppercase
+* **strchr\(str1, ch\)**: Returns a pointer to the first occurrence of character ch in string str1.
+* **strstr\(str1, str2\)**: Returns a pointer to the first occurrence of string str2 in string str1.
+
+
 
 
 
