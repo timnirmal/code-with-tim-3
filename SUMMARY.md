@@ -17,6 +17,8 @@
 ## Data Structures
 
 * [Stack](data-structures/stack.md)
+* [Linked List](data-structures/linked-list.md)
+* [Linked List](data-structures/linked-list-1.md)
 
 ## Strings
 

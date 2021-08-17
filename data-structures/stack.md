@@ -159,5 +159,81 @@ Reverse a string using stack : [https://www.geeksforgeeks.org/stack-set-3-revers
 
 ## Stack using Arrays
 
+```cpp
+#include <iostream>
+#include <stack>
+using namespace std;
+#define MAX 1000
+
+class Stack{
+    int topVal;
+
+public:
+    int a[MAX];
+
+    Stack() { topVal=-1;}
+    bool push(int x);
+    int pop();
+    int top();
+    bool isEmpty();
+};
+
+bool Stack::push(int x) {
+    //Check Overflow Condition
+    if (topVal >= (MAX - 1)){
+        cout<< "Stack Overflow";
+        return false;
+    }
+    else{
+        a[++topVal]=x;
+        return true;
+    }
+}
+
+int Stack::pop() {
+    //Check UnderfLow Condition
+    if(topVal < 0){
+        cout<<"Stack Underflow";
+        return -1;
+    }
+    else{
+        return a[topVal--];
+    }
+}
+
+int Stack::top() {
+    if (topVal < 0) {
+        cout << "Stack is Empty";
+        return 0;
+    }
+    else {
+        return a[topVal];
+    }
+}
+
+bool Stack::isEmpty() {
+    return (topVal < 0);
+}
+
+void showStack(Stack st){
+    while (!st.isEmpty()) {
+        cout << st.top();
+        st.pop();
+    }
+}
+
+int main(){
+    class Stack s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+    cout << s.top() <<endl;
+    cout << s.pop() <<endl;
+    cout << s.isEmpty() <<endl;
+    showStack(s);
+    return 0;
+}
+```
+
 
 
