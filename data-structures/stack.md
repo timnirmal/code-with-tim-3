@@ -149,5 +149,15 @@ int main() {
 {% endtab %}
 {% endtabs %}
 
+#### String and Stack
+
+Sort string of characters using Stack : [https://www.geeksforgeeks.org/sort-string-of-characters-using-stack/?ref=rp](https://www.geeksforgeeks.org/sort-string-of-characters-using-stack/?ref=rp)
+
+Find maximum in stack in O\(1\) without using additional stack : [https://www.geeksforgeeks.org/find-maximum-in-stack-in-o1-without-using-additional-stack/?ref=rp](https://www.geeksforgeeks.org/find-maximum-in-stack-in-o1-without-using-additional-stack/?ref=rp)
+
+Reverse a string using stack : [https://www.geeksforgeeks.org/stack-set-3-reverse-string-using-stack/?ref=rp](https://www.geeksforgeeks.org/stack-set-3-reverse-string-using-stack/?ref=rp)
+
+## Stack using Arrays
+
 
 
