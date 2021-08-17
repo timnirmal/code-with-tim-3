@@ -35,7 +35,7 @@ sss
 ### Insert
 
 {% tabs %}
-{% tab title="First Tab" %}
+{% tab title="Code" %}
 ```cpp
 #include <cassert>
 #include <iterator>
@@ -89,8 +89,8 @@ int main()
 ```
 {% endtab %}
 
-{% tab title="Second Tab" %}
-#### Parameters
+{% tab title="Theory" %}
+### **Parameters**
 
 | index | position at which the content will be inserted |
 | :--- | :--- |
@@ -103,22 +103,52 @@ int main()
 | index\_str | position of the first character in the string `str` to insert |
 | ilist | [std::initializer\_list](https://en.cppreference.com/w/cpp/utility/initializer_list) to insert the characters from |
 | t | object \(convertible to [std::basic\_string\_view](https://en.cppreference.com/w/cpp/string/basic_string_view)\) to insert the characters from |
+
 | Type requirements |  |
+| :--- | :--- |
 | -`InputIt` must meet the requirements of [LegacyInputIterator](https://en.cppreference.com/w/cpp/named_req/InputIterator). |  |
 
-#### Return value
+### Return value
 
-1-5,10-11\) \*this6-9\) An iterator which refers to the copy of the first inserted character or `pos` if no characters were inserted \(`count==0` or `first==last` or `ilist.size()==0`\)
+11\) \*this
 
-#### Exceptions
+6-9\) An iterator which refers to the copy of the first inserted character or `pos` if no characters were inserted \(`count==0` or `first==last` or `ilist.size()==0`\)
 
-1-4, 10\) [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if index &gt; size\(\)5\) Throws [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if index &gt; size\(\) or if index\_str &gt; str.size\(\).11\) Throws [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if index &gt; size\(\) or if index\_str &gt; sv.size\(\).
+### Exceptions
+
+1-4, 10\) [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if index &gt; size\(\)
+
+5\) Throws [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if index &gt; size\(\) or if index\_str &gt; str.size\(\).
+
+11\) Throws [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if index &gt; size\(\) or if index\_str &gt; sv.size\(\).
 
 In all cases, throws [std::length\_error](https://en.cppreference.com/w/cpp/error/length_error) if size\(\) + ins\_count &gt; max\_size\(\) where `ins_count` is the number of characters that will be inserted and may throw any exceptions thrown by `Allocator::allocate`.
+
+Inserts characters into the string.
+
+1\) Inserts `count` copies of character `ch` at the position `index`
+
+2\) Inserts null-terminated character string pointed to by `s` at the position `index`. The length of the string is determined by the first null character using Traits::length\(s\).
+
+3\) Inserts the characters in the range `[s, s+count)` at the position `index`. The range can contain null characters.
+
+4\) Inserts string `str` at the position `index`
+
+5\) Inserts a string, obtained by str.substr\(index\_str, count\) at the position `index`
+
+6\) Inserts character `ch` before the character pointed by `pos`
+
+7\) Inserts `count` copies of character `ch` before the element \(if any\) pointed by `pos`
+
+8\) Inserts characters from the range `[first, last)` before the element \(if any\) pointed by `pos`. This overload does not participate in overload resolution if `InputIt` does not satisfy [LegacyInputIterator](https://en.cppreference.com/w/cpp/named_req/InputIterator). \(since C++11\)
+
+9\) Inserts elements from initializer list `ilist` before the element \(if any\) pointed by `pos`
+
+10\) Implicitly converts `t` to a string view `sv` as if by [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt; sv = t;, then inserts the elements from `sv` before the element \(if any\) pointed by `pos`, as if by insert\(pos, sv.data\(\), sv.size\(\)\). This overload participates in overload resolution only if [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt;&gt; is true and [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, const CharT\*&gt; is false.
+
+11\) Implicitly converts `t` to a string view `sv` as if by [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt; sv = t;, then inserts, before the element \(if any\) pointed by `pos`, the characters from the subview `[index_str, index_str+count)` of `sv`. If the requested subview lasts past the end of `sv`, or if count == npos, the resulting subview is `[index_str, sv.size())`. If index\_str &gt; sv.size\(\), or if index &gt; size\(\), [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) is thrown. This overload participates in overload resolution only if [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt;&gt; is true and [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, const CharT\*&gt; is false.
 {% endtab %}
 {% endtabs %}
 
-```cpp
 
-```
 
