@@ -463,6 +463,41 @@ Removes specified characters from the string.1\) Removes min\(`count`, [size\(\)
 {% tabs %}
 {% tab title="C++" %}
 ```cpp
+std::basic_string<char> str = "string";
+const char* cptr = "C-string";
+const char carr[] = "Two and one";
+
+string output;
+
+// 1) Append a char 3 times.
+// Notice, this is the only overload accepting chars.
+output.append(3, '*');
+//***
+
+//  2) Append a whole string
+output.append(str);
+//***string
+
+// 3) Append part of a string (last 3 letters, in this case)
+output.append(str, 3, 3);
+//***stringing
+
+// 4) Append part of a C-string
+// Notice, because `append` returns *this, we can chain calls together
+output.append(1, ' ').append(carr, 4);
+//***stringing Two
+
+// 5) Append a whole C-string
+output.append(cptr);
+//***stringing Two C-string
+
+// 6) Append range
+output.append(&carr[3], std::end(carr));
+//***stringing Two C-string and one
+
+// 7) Append initializer list
+output.append({ ' ', 'l', 'i', 's', 't' });
+//***stringing Two C-string and one  list
 
 ```
 {% endtab %}
