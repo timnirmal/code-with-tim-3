@@ -90,7 +90,7 @@ void showStack(stack <int> st){
 
 [https://www.geeksforgeeks.org/sort-stack-using-temporary-stack/?ref=rp](https://www.geeksforgeeks.org/sort-stack-using-temporary-stack/?ref=rp)
 
-Sort using
+Sort using Recurssion : [https://www.geeksforgeeks.org/sort-a-stack-using-recursion/?ref=rp](https://www.geeksforgeeks.org/sort-a-stack-using-recursion/?ref=rp)
 {% endtab %}
 
 {% tab title="Code" %}
