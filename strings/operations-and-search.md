@@ -458,7 +458,268 @@ Removes specified characters from the string.1\) Removes min\(`count`, [size\(\)
 {% endtab %}
 {% endtabs %}
 
+### append
 
+{% tabs %}
+{% tab title="C++" %}
+```cpp
 
+```
+{% endtab %}
 
+{% tab title="Code" %}
+```cpp
+std::basic_string<char> str = "string";
+const char* cptr = "C-string";
+const char carr[] = "Two and one";
+
+string output;
+
+// 1) Append a char 3 times.
+// Notice, this is the only overload accepting chars.
+output.append(3, '*');
+//***
+
+//  2) Append a whole string
+output.append(str);
+//***string
+
+// 3) Append part of a string (last 3 letters, in this case)
+output.append(str, 3, 3);
+//***stringing
+
+// 4) Append part of a C-string
+// Notice, because `append` returns *this, we can chain calls together
+output.append(1, ' ').append(carr, 4);
+//***stringing Two
+
+// 5) Append a whole C-string
+output.append(cptr);
+//***stringing Two C-string
+
+// 6) Append range
+output.append(&carr[3], std::end(carr));
+//***stringing Two C-string and one
+
+// 7) Append initializer list
+output.append({ ' ', 'l', 'i', 's', 't' });
+//***stringing Two C-string and one  list
+
+```
+{% endtab %}
+
+{% tab title="" %}
+#### Parameters
+
+| count | - | number of characters to append |
+| :--- | :--- | :--- |
+| pos | - | the index of the first character to append |
+| ch | - | character value to append |
+| first, last | - | range of characters to append |
+| str | - | string to append |
+| s | - | pointer to the character string to append |
+| ilist | - | initializer list with the characters to append |
+| t | - | object convertible to [std::basic\_string\_view](https://en.cppreference.com/w/cpp/string/basic_string_view) with the characters to append |
+
+#### Return value
+
+\*this
+
+#### Complexity
+
+There are no standard complexity guarantees, typical implementations behave similar to [std::vector::insert](https://en.cppreference.com/w/cpp/container/vector/insert).
+
+#### Exceptions
+
+If an exception is thrown for any reason, this function has no effect \(strong exception guarantee\). \(since C++11\)
+
+If the operation would result in `size() > max_size()`, throws [std::length\_error](https://en.cppreference.com/w/cpp/error/length_error).
+{% endtab %}
+
+{% tab title="" %}
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">basic_string&amp; append( size_type count, CharT ch );</th>
+      <th style="text-align:left">(until C++20)</th>
+      <th style="text-align:left"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">constexpr basic_string&amp; append( size_type count, CharT ch );</td>
+      <td
+      style="text-align:left">(since C++20)</td>
+        <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">(2)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">basic_string&amp; append( const basic_string&amp; str );</td>
+      <td style="text-align:left">(until C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">constexpr basic_string&amp; append( const basic_string&amp; str );</td>
+      <td
+      style="text-align:left">(since C++20)</td>
+        <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">(3)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">basic_string&amp; append( const basic_string&amp; str,
+        <br />size_type pos, size_type count );</td>
+      <td style="text-align:left">(until C++14)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">basic_string&amp; append( const basic_string&amp; str,
+        <br />size_type pos, size_type count = npos );</td>
+      <td style="text-align:left">(since C++14)
+        <br />(until C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">constexpr basic_string&amp; append( const basic_string&amp; str,
+        <br />size_type pos, size_type count = npos );</td>
+      <td style="text-align:left">(since C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">(4)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">basic_string&amp; append( const CharT* s, size_type count );</td>
+      <td style="text-align:left">(until C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">constexpr basic_string&amp; append( const CharT* s, size_type count );</td>
+      <td
+      style="text-align:left">(since C++20)</td>
+        <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">(5)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">basic_string&amp; append( const CharT* s );</td>
+      <td style="text-align:left">(until C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">constexpr basic_string&amp; append( const CharT* s );</td>
+      <td style="text-align:left">(since C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">(6)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">template&lt; class InputIt &gt;
+        <br />basic_string&amp; append( InputIt first, InputIt last );</td>
+      <td style="text-align:left">(until C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">template&lt; class InputIt &gt;
+        <br />constexpr basic_string&amp; append( InputIt first, InputIt last );</td>
+      <td
+      style="text-align:left">(since C++20)</td>
+        <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">(7)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">basic_string&amp; append( <a href="http://en.cppreference.com/w/cpp/utility/initializer_list">std::initializer_list</a>&lt;CharT&gt;
+        ilist );</td>
+      <td style="text-align:left">(since C++11)
+        <br />(until C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">constexpr basic_string&amp; append( <a href="http://en.cppreference.com/w/cpp/utility/initializer_list">std::initializer_list</a>&lt;CharT&gt;
+        ilist );</td>
+      <td style="text-align:left">(since C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">(8)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">template &lt; class T &gt;
+        <br />basic_string&amp; append( const T&amp; t );</td>
+      <td style="text-align:left">(since C++17)
+        <br />(until C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">template &lt; class T &gt;
+        <br />constexpr basic_string&amp; append( const T&amp; t );</td>
+      <td style="text-align:left">(since C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">(9)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">
+        <p>template &lt; class T &gt;
+          <br />
+        </p>
+        <p>basic_string&amp; append( const T&amp; t,
+          <br />size_type pos, size_type count = npos );</p>
+      </td>
+      <td style="text-align:left">(since C++17)
+        <br />(until C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">
+        <p>template &lt; class T &gt;
+          <br />
+        </p>
+        <p>constexpr basic_string&amp; append( const T&amp; t,
+          <br />size_type pos, size_type count = npos );</p>
+      </td>
+      <td style="text-align:left">(since C++20)</td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+  </tbody>
+</table>
+
+Appends additional characters to the string.1\) Appends `count` copies of character `ch`2\) Appends string `str`3\) Appends a substring `[pos, pos+count)` of `str`. If the requested substring lasts past the end of the string, or if count == npos, the appended substring is `[pos, size())`. If pos &gt; str.size\(\), [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) is thrown.4\) Appends characters in the range `[s, s + count)`. This range can contain null characters.5\) Appends the null-terminated character string pointed to by `s`. The length of the string is determined by the first null character using Traits::length\(s\).6\) Appends characters in the range `[first, last)`.
+
+| This overload has the same effect as overload \(1\) if `InputIt` is an integral type. | \(until C++11\) |
+| :--- | :--- |
+| This overload only participates in overload resolution if `InputIt` qualifies as an [LegacyInputIterator](https://en.cppreference.com/w/cpp/named_req/InputIterator) | \(since C++11\) |
+
+7\) Appends characters from the initializer list `ilist`.8\) Implicitly converts `t` to a string view `sv` as if by [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt; sv = t;, then appends all characters from `sv` as if by append\(sv.data\(\), sv.size\(\)\). This overload participates in overload resolution only if [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt;&gt; is true and [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, const CharT\*&gt; is false.9\) Implicitly converts `t` to a string view `sv` as if by [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt; sv = t;, then appends the characters from the subview `[pos, pos+count)` of `sv`. If the requested subview extends past the end of `sv`, or if count == npos, the appended subview is `[pos, sv.size())`. If pos &gt;= sv.size\(\), [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) is thrown. This overload participates in overload resolution only if [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt;&gt; is true and [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, const CharT\*&gt; is false.
+{% endtab %}
+{% endtabs %}
 
