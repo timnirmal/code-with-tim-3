@@ -6,7 +6,7 @@
 | [insert](https://en.cppreference.com/w/cpp/string/basic_string/insert) | inserts characters |
 | [erase](https://en.cppreference.com/w/cpp/string/basic_string/erase) | removes characters |
 | [push\_back](https://en.cppreference.com/w/cpp/string/basic_string/push_back) | appends a character to the end |
-| [pop\_back](https://en.cppreference.com/w/cpp/string/basic_string/pop_back)\(C++11\) | removes the last character |
+| [pop\_back](https://en.cppreference.com/w/cpp/string/basic_string/pop_back)\(C++11\) | removes the last character \(equal to `erase(end()-1)`\) |
 | [append](https://en.cppreference.com/w/cpp/string/basic_string/append) | appends characters to the end |
 | [operator+=](https://en.cppreference.com/w/cpp/string/basic_string/operator%2B%3D) | appends characters to the end |
 | [compare](https://en.cppreference.com/w/cpp/string/basic_string/compare) | compares two strings |
@@ -148,7 +148,317 @@ Inserts characters into the string.
 
 11\) Implicitly converts `t` to a string view `sv` as if by [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt; sv = t;, then inserts, before the element \(if any\) pointed by `pos`, the characters from the subview `[index_str, index_str+count)` of `sv`. If the requested subview lasts past the end of `sv`, or if count == npos, the resulting subview is `[index_str, sv.size())`. If index\_str &gt; sv.size\(\), or if index &gt; size\(\), [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) is thrown. This overload participates in overload resolution only if [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt;&gt; is true and [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, const CharT\*&gt; is false.
 {% endtab %}
+
+{% tab title="" %}
+
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">(1)</th>
+      <th style="text-align:left">+basic_string&amp; insert( size_type index, size_type count, CharT ch
+        );</th>
+      <th style="text-align:left">(until C++20)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">constexpr basic_string&amp; insert( size_type index, size_type count,
+        CharT ch );</td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(2)</td>
+      <td style="text-align:left">basic_string&amp; insert( size_type index, const CharT* s );</td>
+      <td style="text-align:left">(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">constexpr basic_string&amp; insert( size_type index, const CharT* s );</td>
+      <td
+      style="text-align:left">(since C++20</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(3)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">basic_string&amp; insert( size_type index, const CharT* s, size_type count
+        );</td>
+      <td style="text-align:left">(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">constexpr basic_string&amp; insert( size_type index,
+        <br />const CharT* s, size_type count );</td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(4)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">basic_string&amp; insert( size_type index, const basic_string&amp; str
+        );</td>
+      <td style="text-align:left">(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">constexpr basic_string&amp; insert( size_type index, const basic_string&amp;
+        str );</td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(5)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">basic_string&amp; insert( size_type index, const basic_string&amp; str,
+        <br
+        />size_type index_str, size_type count );</td>
+      <td style="text-align:left">(until C++14)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">basic_string&amp; insert( size_type index, const basic_string&amp; str,
+        <br
+        />size_type index_str, size_type count = npos);</td>
+      <td style="text-align:left">(since C++14)
+        <br />(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">constexpr basic_string&amp; insert( size_type index, const basic_string&amp;
+        str,
+        <br />size_type index_str, size_type count = npos);</td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(6)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">iterator insert( iterator pos, CharT ch );</td>
+      <td style="text-align:left">(until C++11)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">iterator insert( const_iterator pos, CharT ch );</td>
+      <td style="text-align:left">(since C++11)
+        <br />(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">constexpr iterator insert( const_iterator pos, CharT ch );</td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(7)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">void insert( iterator pos, size_type count, CharT ch );</td>
+      <td style="text-align:left">(until C++11)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">iterator insert( const_iterator pos, size_type count, CharT ch );</td>
+      <td
+      style="text-align:left">(since C++11)
+        <br />(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">constexpr iterator insert( const_iterator pos, size_type count, CharT
+        ch );</td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(8)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">template&lt; class InputIt &gt;
+        <br />void insert( iterator pos, InputIt first, InputIt last );</td>
+      <td style="text-align:left">(until C++11)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">template&lt; class InputIt &gt;
+        <br />iterator insert( const_iterator pos, InputIt first, InputIt last );</td>
+      <td
+      style="text-align:left">(since C++11)
+        <br />(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">template&lt; class InputIt &gt;
+        <br />constexpr iterator insert( const_iterator pos, InputIt first, InputIt
+        last );</td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(9)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">iterator insert( const_iterator pos, <a href="http://en.cppreference.com/w/cpp/utility/initializer_list">std::initializer_list</a>&lt;CharT&gt;
+        ilist );</td>
+      <td style="text-align:left">(since C++11)
+        <br />(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">constexpr iterator insert( const_iterator pos,
+        <br /> <a href="http://en.cppreference.com/w/cpp/utility/initializer_list">std::initializer_list</a>&lt;CharT&gt;
+        ilist );</td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(10)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">template &lt; class T &gt;
+        <br />basic_string&amp; insert( size_type pos, const T&amp; t );</td>
+      <td style="text-align:left">(since C++17)
+        <br />(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">template &lt; class T &gt;
+        <br />constexpr basic_string&amp; insert( size_type pos, const T&amp; t );</td>
+      <td
+      style="text-align:left">(since C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">(11)</td>
+      <td style="text-align:left"></td>
+      <td style="text-align:left"></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <p>template &lt; class T &gt;
+          <br />
+        </p>
+        <p>basic_string&amp; insert( size_type index, const T&amp; t,
+          <br />size_type index_str, size_type count = npos);</p>
+      </td>
+      <td style="text-align:left">(since C++17)
+        <br />(until C++20)</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"></td>
+      <td style="text-align:left">
+        <p>template &lt; class T &gt;
+          <br />
+        </p>
+        <p>constexpr basic_string&amp; insert( size_type index, const T&amp; t,
+          <br
+          />size_type index_str, size_type count = npos);</p>
+      </td>
+      <td style="text-align:left">(since C++20)</td>
+    </tr>
+  </tbody>
+</table>
+{% endtab %}
 {% endtabs %}
+
+### Erase
+
+{% tabs %}
+{% tab title="First Tab" %}
+```cpp
+#include <iostream>
+#include <algorithm>
+#include <string>
+ 
+int main()
+{
+    std::string s = "This is an example";
+    std::cout << s << '\n';
+ 
+    s.erase(0, 5); // Erase "This "
+    std::cout << s << '\n';
+ 
+    s.erase(std::find(s.begin(), s.end(), ' ')); // Erase ' '
+    std::cout << s << '\n';
+ 
+    s.erase(s.find(' ')); // Trim from ' ' to the end of the string
+    std::cout << s << '\n';
+}
+
+//This is an example
+//is an example
+//isan example
+//isan
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+#### Parameters
+
+| index | - | first character to remove |
+| :--- | :--- | :--- |
+| count | - | number of characters to remove |
+| position | - | iterator to the character to remove |
+| first, last | - | range of the characters to remove |
+
+#### Return value
+
+1\) \*this2\) iterator pointing to the character immediately following the character erased, or `end()` if no such character exists3\) iterator pointing to the character `last` pointed to before the erase, or `end()` if no such character exists
+
+#### Exceptions
+
+1\) [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if index &gt; size\(\).2-3\) Throws nothing.
+
+In any case, if an exception is thrown for any reason, this function has no effect \(strong exception guarantee\). \(since C++11\)
+{% endtab %}
+
+{% tab title="" %}
+
+
+| basic\_string& erase\( size\_type index = 0, size\_type count = npos \); | \(until C++20\) |  |
+| :--- | :--- | :--- |
+| constexpr basic\_string& erase\( size\_type index = 0, size\_type count = npos \); | \(since C++20\) |  |
+|  | \(2\) |  |
+| iterator erase\( iterator position \); | \(until C++11\) |  |
+| iterator erase\( const\_iterator position \); | \(since C++11\) \(until C++20\) |  |
+| constexpr iterator erase\( const\_iterator position \); | \(since C++20\) |  |
+|  | \(3\) |  |
+| iterator erase\( iterator first, iterator last \); | \(until C++11\) |  |
+| iterator erase\( const\_iterator first, const\_iterator last \); | \(since C++11\) \(until C++20\) |  |
+| constexpr iterator erase\( const\_iterator first, const\_iterator last \); | \(since C++20\) |  |
+|  |  |  |
+
+Removes specified characters from the string.1\) Removes min\(`count`, [size\(\)](https://en.cppreference.com/w/cpp/string/basic_string/size) `- index`\) characters starting at `index`.2\) Removes the character at `position`.3\) Removes the characters in the range `[first, last)`.
+{% endtab %}
+{% endtabs %}
+
+
 
 
 
