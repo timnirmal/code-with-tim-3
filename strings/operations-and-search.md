@@ -1073,5 +1073,174 @@ int main()
 {% endtab %}
 {% endtabs %}
 
+### Replace
+
+{% tabs %}
+{% tab title="" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="Code" %}
+```cpp
+#include <cassert>
+#include <cstddef>
+#include <iostream>
+#include <string>
+#include <string_view>
+ 
+std::size_t replace_all(std::string& inout, std::string_view what, std::string_view with);
+std::size_t remove_all(std::string& inout, std::string_view what);
+void test_replace_remove_all();
+ 
+int main()
+{
+    std::string str{"The quick brown fox jumps over the lazy dog."};
+ 
+    str.replace(10, 5, "red"); // (5)
+ 
+    str.replace(str.begin(), str.begin() + 3, 1, 'A'); // (6)
+ 
+    std::cout << str << "\n\n";
+ 
+    test_replace_remove_all();
+}
+ 
+ 
+std::size_t replace_all(std::string& inout, std::string_view what, std::string_view with)
+{
+    std::size_t count{};
+    for (std::string::size_type pos{};
+         inout.npos != (pos = inout.find(what.data(), pos, what.length()));
+         pos += with.length(), ++count) {
+        inout.replace(pos, what.length(), with.data(), with.length());
+    }
+    return count;
+}
+ 
+std::size_t remove_all(std::string& inout, std::string_view what) {
+    return replace_all(inout, what, "");
+}
+ 
+void test_replace_remove_all()
+{
+    std::string str2{"ftp: ftpftp: ftp:"};
+    std::cout << "#1 " << str2 << '\n';
+ 
+    auto count = replace_all(str2, "ftp", "http");
+    assert(count == 4);
+    std::cout << "#2 " << str2 << '\n';
+ 
+    count = replace_all(str2, "ftp", "http");
+    assert(count == 0);
+    std::cout << "#3 " << str2 << '\n';
+ 
+    count = remove_all(str2, "http");
+    assert(count == 4);
+    std::cout << "#4 " << str2 << '\n';
+}
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+#### Parameters
+
+| pos | - | start of the substring that is going to be replaced |
+| :--- | :--- | :--- |
+| count | - | length of the substring that is going to be replaced |
+| first, last | - | range of characters that is going to be replaced |
+| str | - | string to use for replacement |
+| pos2 | - | start of the substring to replace with |
+| count2 | - | number of characters to replace with |
+| cstr | - | pointer to the character string to use for replacement |
+| ch | - | character value to use for replacement |
+| first2, last2 | - | range of characters to use for replacement |
+| ilist | - | initializer list with the characters to use for replacement |
+| t | - | object \(convertible to [std::basic\_string\_view](https://en.cppreference.com/w/cpp/string/basic_string_view)\) with the characters to use for replacement |
+
+#### Return value
+
+\*this.
+
+#### Exceptions
+
+* [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if `pos > length()` or `pos2 > str.length()`
+* [std::length\_error](https://en.cppreference.com/w/cpp/error/length_error) if the resulting string will exceed maximum possible string length \([max\_size\(\)](https://en.cppreference.com/w/cpp/string/basic_string/max_size)\)
+
+In any case, if an exception is thrown for any reason, this function has no effect \(strong exception guarantee\). \(since C++11\)
+{% endtab %}
+{% endtabs %}
+
+### substr
+
+{% tabs %}
+{% tab title="First Tab" %}
+```cpp
+#include <string>
+#include <iostream>
+ 
+int main()
+{
+    std::string a = "0123456789abcdefghij";
+ 
+    // count is npos, returns [pos, size())
+    std::string sub1 = a.substr(10);
+    std::cout << sub1 << '\n';
+ 
+    // both pos and pos+count are within bounds, returns [pos, pos+count)
+    std::string sub2 = a.substr(5, 3);
+    std::cout << sub2 << '\n';
+ 
+    // pos is within bounds, pos+count is not, returns [pos, size()) 
+    std::string sub4 = a.substr(a.size()-3, 50);
+    // this is effectively equivalent to
+    // std::string sub4 = a.substr(17, 3);
+    // since a.size() == 20, pos == a.size()-3 == 17, and a.size()-pos == 3
+ 
+    std::cout << sub4 << '\n';
+ 
+    try {
+        // pos is out of bounds, throws
+        std::string sub5 = a.substr(a.size()+3, 50);
+        std::cout << sub5 << '\n';
+    } catch(const std::out_of_range& e) {
+        std::cout << "pos exceeds string size\n";
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+Returns a substring `[pos, pos+count)`. If the requested substring extends past the end of the string, i.e. the `count` is greater than size\(\) - pos \(e.g. if count == npos\), the returned substring is `[pos,` [`size()`](https://en.cppreference.com/w/cpp/string/basic_string/size)`)`.
+
+#### Parameters
+
+| pos | - | position of the first character to include |
+| :--- | :--- | :--- |
+| count | - | length of the substring |
+
+#### Return value
+
+String containing the substring `[pos, pos+count)` or `[pos,` [`size()`](https://en.cppreference.com/w/cpp/string/basic_string/size)`)`.
+
+#### Exceptions
+
+[std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if `pos >` [`size()`](https://en.cppreference.com/w/cpp/string/basic_string/size)
+
+#### Complexity
+
+Linear in `count`
+
+#### Notes
+
+The returned string is constructed as if by basic\_string\(data\(\)+pos, count\), which implies that the returned string's allocator will be default-constructed — the new allocator might not be a copy of `this->`[`get_allocator()`](https://en.cppreference.com/w/cpp/string/basic_string/get_allocator).
+
+| basic\_string substr\( size\_type pos = 0, size\_type count = npos \) const; |  | \(until C++20\) |
+| :--- | :--- | :--- |
+| constexpr basic\_string substr\( size\_type pos = 0, size\_type count = npos \) const; |  | \(since C++20\) |
+{% endtab %}
+{% endtabs %}
+
 
 
