@@ -19,7 +19,7 @@
 | [resize](https://en.cppreference.com/w/cpp/string/basic_string/resize) | changes the number of characters stored |
 | [swap](https://en.cppreference.com/w/cpp/string/basic_string/swap) | swaps the contents |
 
-sss
+
 
 | **Search** |  |
 | :--- | :--- |
