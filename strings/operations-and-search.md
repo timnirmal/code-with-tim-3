@@ -1323,5 +1323,43 @@ The first version initializes new characters to CharT\(\), the second version in
 {% tab title="Second Tab" %}
 
 {% endtab %}
+
+{% tab title="" %}
+
+
+| void resize\( size\_type count \); | \(until C++20\) |  |
+| :--- | :--- | :--- |
+| constexpr void resize\( size\_type count \); | \(since C++20\) |  |
+|  | \(2\) |  |
+| void resize\( size\_type count, CharT ch \); | \(until C++20\) |  |
+| constexpr void resize\( size\_type count, CharT ch \); | \(since C++20\) |  |
+|  |  |  |
+
+Resizes the string to contain `count` characters.
+
+If the current size is less than `count`, additional characters are appended.
+
+If the current size is greater than `count`, the string is reduced to its first `count` elements.
+
+The first version initializes new characters to CharT\(\), the second version initializes new characters to `ch`.
+
+#### Parameters
+
+| count | - | new size of the string |
+| :--- | :--- | :--- |
+| ch | - | character to initialize the new characters with |
+
+#### Return value
+
+\(none\)
+
+#### Exceptions
+
+[std::length\_error](https://en.cppreference.com/w/cpp/error/length_error) if count &gt; max\_size\(\). Any exceptions thrown by corresponding `Allocator`.
+
+If an exception is thrown for any reason, this function has no effect \(strong exception guarantee\). \(since C++11\)
+{% endtab %}
 {% endtabs %}
+
+
 
