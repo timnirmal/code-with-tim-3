@@ -1242,5 +1242,86 @@ The returned string is constructed as if by basic\_string\(data\(\)+pos, count\)
 {% endtab %}
 {% endtabs %}
 
+### Copy
 
+{% tabs %}
+{% tab title="First Tab" %}
+```cpp
+#include <string>
+#include <iostream>
+
+int main()
+{
+    std::string foo("quuuux");
+    char bar[7]{};
+    foo.copy(bar, sizeof bar,2);
+    std::cout << bar << '\n';
+}
+
+//uuux
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+
+| size\_type copy\( CharT\* dest, size\_type count, size\_type pos = 0 \) const; |  | \(until C++20\) |
+| :--- | :--- | :--- |
+| constexpr size\_type copy\( CharT\* dest, size\_type count, size\_type pos = 0 \) const; |  | \(since C++20\) |
+|  |  |  |
+
+Copies a substring `[pos, pos+count)` to character string pointed to by `dest`. If the requested substring lasts past the end of the string, or if count == npos, the copied substring is `[pos, size())`. The resulting character string is not null-terminated.
+
+If pos &gt; size\(\), [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) is thrown.
+
+#### Parameters
+
+| dest | - | pointer to the destination character string |
+| :--- | :--- | :--- |
+| count | - | length of the substring |
+| pos | - | position of the first character to include |
+
+#### Return value
+
+number of characters copied
+
+#### Exceptions
+
+[std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if pos &gt; size\(\).
+
+#### Complexity
+
+linear in `count`
+{% endtab %}
+{% endtabs %}
+
+### Resize
+
+{% tabs %}
+{% tab title="First Tab" %}
+Resizes the string to contain `count` characters.
+
+If the current size is less than `count`, additional characters are appended.
+
+If the current size is greater than `count`, the string is reduced to its first `count` elements.
+
+The first version initializes new characters to CharT\(\), the second version initializes new characters to `ch`.
+
+```text
+    const unsigned  desired_length(8);
+    string     long_string( "Where is the end?" );
+    string     short_string( "Ha" );
+    
+// Shorten
+ long_string.resize( desired_length );
+  
+// Lengthen
+ short_string.resize( desired_length, 'a' );
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+{% endtabs %}
 
