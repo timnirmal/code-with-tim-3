@@ -788,9 +788,15 @@ int main()
 }
 ```
 
-Compare
+### Compare
 
-B
+Lexographic Order
+
+{% hint style="info" %}
+-1 0  9 A S a s                   is in Lexographic Order
+{% endhint %}
+
+We can use `(str1 < str 2)` ,`(str1 > str 2),(str1 == str 2)`instead of this.
 
 {% tabs %}
 {% tab title="C++" %}
@@ -968,5 +974,104 @@ int main()
 //Bat comes before Super
 ```
 {% endtab %}
+
+{% tab title="Link" %}
+{% embed url="https://www.geeksforgeeks.org/comparing-two-strings-cpp/" %}
+
+{% embed url="https://en.cppreference.com/w/cpp/string/basic\_string/compare" %}
+{% endtab %}
 {% endtabs %}
+
+### start\_with , end\_with
+
+{% tabs %}
+{% tab title="start\_with" %}
+```cpp
+#include <iostream>
+#include <string_view>
+#include <string>
+ 
+template <typename PrefixType>
+void test_prefix_print(const std::string& str, PrefixType prefix)
+{
+    std::cout << '\'' << str << "' starts with '" << prefix << "': " <<
+        str.starts_with(prefix) << '\n';
+}
+ 
+int main()
+{
+    std::boolalpha(std::cout);    
+    auto helloWorld = std::string("hello world");
+ 
+    test_prefix_print(helloWorld, std::string_view("hello"));
+ 
+    test_prefix_print(helloWorld, std::string_view("goodbye"));
+ 
+    test_prefix_print(helloWorld, 'h');
+ 
+    test_prefix_print(helloWorld, 'x');
+}
+```
+{% endtab %}
+
+{% tab title="end\_with" %}
+```cpp
+#include <iostream>
+#include <string_view>
+#include <string>
+ 
+template <typename SuffixType>
+void test_suffix_print(const std::string& str, SuffixType suffix)
+{
+    std::cout << '\'' << str << "' ends with '" << suffix << "': " <<
+        str.ends_with(suffix) << '\n';
+}
+ 
+int main()
+{
+    std::boolalpha(std::cout);    
+    auto helloWorld = std::string("hello world");
+ 
+    test_suffix_print(helloWorld, std::string_view("world"));
+ 
+    test_suffix_print(helloWorld, std::string_view("goodbye"));
+ 
+    test_suffix_print(helloWorld, 'd');
+ 
+    test_suffix_print(helloWorld, 'x');
+}
+```
+{% endtab %}
+
+{% tab title="contains" %}
+```cpp
+#include <iostream>
+#include <string_view>
+#include <string>
+ 
+template <typename SubstrType>
+void test_substring_print(const std::string& str, SubstrType subs)
+{
+    std::cout << '\'' << str << "' contains '" << subs << "': " <<
+        str.contains(subs) << '\n';
+}
+ 
+int main()
+{
+    std::boolalpha(std::cout);    
+    auto helloWorld = std::string("hello world");
+ 
+    test_substring_print(helloWorld, std::string_view("hello"));
+ 
+    test_substring_print(helloWorld, std::string_view("goodbye"));
+ 
+    test_substring_print(helloWorld, 'w');
+ 
+    test_substring_print(helloWorld, 'x');
+}
+```
+{% endtab %}
+{% endtabs %}
+
+
 
