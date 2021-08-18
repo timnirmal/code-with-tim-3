@@ -19,7 +19,7 @@
 | [resize](https://en.cppreference.com/w/cpp/string/basic_string/resize) | changes the number of characters stored |
 | [swap](https://en.cppreference.com/w/cpp/string/basic_string/swap) | swaps the contents |
 
-sss
+
 
 | **Search** |  |
 | :--- | :--- |
@@ -757,4 +757,609 @@ Appends additional characters to the string.1\) Appends `count` copies of charac
 7\) Appends characters from the initializer list `ilist`.8\) Implicitly converts `t` to a string view `sv` as if by [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt; sv = t;, then appends all characters from `sv` as if by append\(sv.data\(\), sv.size\(\)\). This overload participates in overload resolution only if [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt;&gt; is true and [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, const CharT\*&gt; is false.9\) Implicitly converts `t` to a string view `sv` as if by [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt; sv = t;, then appends the characters from the subview `[pos, pos+count)` of `sv`. If the requested subview extends past the end of `sv`, or if count == npos, the appended subview is `[pos, sv.size())`. If pos &gt;= sv.size\(\), [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) is thrown. This overload participates in overload resolution only if [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, [std::basic\_string\_view](http://en.cppreference.com/w/cpp/string/basic_string_view)&lt;CharT, Traits&gt;&gt; is true and [std::is\_convertible\_v](http://en.cppreference.com/w/cpp/types/is_convertible)&lt;const T&, const CharT\*&gt; is false.
 {% endtab %}
 {% endtabs %}
+
+### Operator +=
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <string>
+ 
+int main()
+{
+   std::string str;
+   str.reserve(50); //reserves sufficient storage space to avoid memory reallocation
+   std::cout << std::quoted(str) << '\n'; //empty string
+ 
+   str += "This";
+   std::cout << std::quoted(str) << '\n';
+ 
+   str += std::string(" is ");
+   std::cout << std::quoted(str) << '\n';
+ 
+   str += 'a';
+   std::cout << std::quoted(str) << '\n';
+ 
+   str += {' ','s','t','r','i','n','g','.'};
+   std::cout << std::quoted(str) << '\n';
+ 
+   str += 76.85; // equivalent to str += static_cast<char>(76.85), might not be the intent
+   std::cout << std::quoted(str) << '\n';
+}
+```
+
+### Compare
+
+Lexographic Order
+
+{% hint style="info" %}
+-1 0  9 A S a s                   is in Lexographic Order
+{% endhint %}
+
+We can use `(str1 < str 2)` ,`(str1 > str 2),(str1 == str 2)`instead of this.
+
+{% tabs %}
+{% tab title="C++" %}
+```cpp
+#include <cassert>
+
+    // 1) Compare with other string
+    {
+        int compare_value{
+            std::string{"Batman"}.compare(std::string{"Superman"})
+        };
+        //Batman comes before Superman
+    }
+ 
+    // 2) Compare substring with other string
+    {
+        int compare_value{
+            std::string{"Batman"}.compare(3, 3, std::string{"Superman"})
+        };
+        std::cout << (
+            compare_value < 0 ? "man comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before man\n" :
+            "man and Superman are the same.\n"
+        );
+    }
+ 
+    // 3) Compare substring with other substring
+    {
+        std::string a{"Batman"};
+        std::string b{"Superman"};
+ 
+        int compare_value{a.compare(3, 3, b, 5, 3)};
+ 
+        std::cout << (
+            compare_value < 0 ? "man comes before man\n" :
+            compare_value > 0 ? "man comes before man\n" :
+            "man and man are the same.\n"
+        );
+        // Compare substring with other substring
+        // defaulting to end of other string
+        assert(compare_value == a.compare(3, 3, b, 5));
+    }
+ 
+    // 4) Compare with char pointer
+    {
+        int compare_value{std::string{"Batman"}.compare("Superman")};
+ 
+        std::cout << (
+            compare_value < 0 ? "Batman comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before Batman\n" :
+            "Superman and Batman are the same.\n"
+        );
+    }
+ 
+    // 5) Compare substring with char pointer
+    {
+        int compare_value{std::string{"Batman"}.compare(3, 3, "Superman")};
+ 
+        std::cout << (
+            compare_value < 0 ? "man comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before man\n" :
+            "man and Superman are the same.\n"
+        );
+    }
+ 
+    // 6) Compare substring with char pointer substring
+    {
+        int compare_value{std::string{"Batman"}.compare(0, 3, "Superman", 5)};
+ 
+        std::cout << (
+            compare_value < 0 ? "Bat comes before Super\n" :
+            compare_value > 0 ? "Super comes before Bat\n" :
+            "Super and Bat are the same.\n"
+        );
+    }
+}
+
+//Batman comes before Superman
+//Superman comes before man
+//man and man are the same.
+//Batman comes before Superman
+//Superman comes before man
+//Bat comes before Super
+```
+{% endtab %}
+
+{% tab title="Code" %}
+```cpp
+#include <cassert>
+#include <string>
+#include <iostream>
+ 
+int main() 
+{
+    // 1) Compare with other string
+    {
+        int compare_value{
+            std::string{"Batman"}.compare(std::string{"Superman"})
+        };
+        std::cout << (
+            compare_value < 0 ? "Batman comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before Batman\n" :
+            "Superman and Batman are the same.\n"
+        );
+    }
+ 
+    // 2) Compare substring with other string
+    {
+        int compare_value{
+            std::string{"Batman"}.compare(3, 3, std::string{"Superman"})
+        };
+        std::cout << (
+            compare_value < 0 ? "man comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before man\n" :
+            "man and Superman are the same.\n"
+        );
+    }
+ 
+    // 3) Compare substring with other substring
+    {
+        std::string a{"Batman"};
+        std::string b{"Superman"};
+ 
+        int compare_value{a.compare(3, 3, b, 5, 3)};
+ 
+        std::cout << (
+            compare_value < 0 ? "man comes before man\n" :
+            compare_value > 0 ? "man comes before man\n" :
+            "man and man are the same.\n"
+        );
+        // Compare substring with other substring
+        // defaulting to end of other string
+        assert(compare_value == a.compare(3, 3, b, 5));
+    }
+ 
+    // 4) Compare with char pointer
+    {
+        int compare_value{std::string{"Batman"}.compare("Superman")};
+ 
+        std::cout << (
+            compare_value < 0 ? "Batman comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before Batman\n" :
+            "Superman and Batman are the same.\n"
+        );
+    }
+ 
+    // 5) Compare substring with char pointer
+    {
+        int compare_value{std::string{"Batman"}.compare(3, 3, "Superman")};
+ 
+        std::cout << (
+            compare_value < 0 ? "man comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before man\n" :
+            "man and Superman are the same.\n"
+        );
+    }
+ 
+    // 6) Compare substring with char pointer substring
+    {
+        int compare_value{std::string{"Batman"}.compare(0, 3, "Superman", 5)};
+ 
+        std::cout << (
+            compare_value < 0 ? "Bat comes before Super\n" :
+            compare_value > 0 ? "Super comes before Bat\n" :
+            "Super and Bat are the same.\n"
+        );
+    }
+}
+
+//Batman comes before Superman
+//Superman comes before man
+//man and man are the same.
+//Batman comes before Superman
+//Superman comes before man
+//Bat comes before Super
+```
+{% endtab %}
+
+{% tab title="Link" %}
+{% embed url="https://www.geeksforgeeks.org/comparing-two-strings-cpp/" %}
+
+{% embed url="https://en.cppreference.com/w/cpp/string/basic\_string/compare" %}
+{% endtab %}
+{% endtabs %}
+
+### start\_with , end\_with
+
+{% tabs %}
+{% tab title="start\_with" %}
+```cpp
+#include <iostream>
+#include <string_view>
+#include <string>
+ 
+template <typename PrefixType>
+void test_prefix_print(const std::string& str, PrefixType prefix)
+{
+    std::cout << '\'' << str << "' starts with '" << prefix << "': " <<
+        str.starts_with(prefix) << '\n';
+}
+ 
+int main()
+{
+    std::boolalpha(std::cout);    
+    auto helloWorld = std::string("hello world");
+ 
+    test_prefix_print(helloWorld, std::string_view("hello"));
+ 
+    test_prefix_print(helloWorld, std::string_view("goodbye"));
+ 
+    test_prefix_print(helloWorld, 'h');
+ 
+    test_prefix_print(helloWorld, 'x');
+}
+```
+{% endtab %}
+
+{% tab title="end\_with" %}
+```cpp
+#include <iostream>
+#include <string_view>
+#include <string>
+ 
+template <typename SuffixType>
+void test_suffix_print(const std::string& str, SuffixType suffix)
+{
+    std::cout << '\'' << str << "' ends with '" << suffix << "': " <<
+        str.ends_with(suffix) << '\n';
+}
+ 
+int main()
+{
+    std::boolalpha(std::cout);    
+    auto helloWorld = std::string("hello world");
+ 
+    test_suffix_print(helloWorld, std::string_view("world"));
+ 
+    test_suffix_print(helloWorld, std::string_view("goodbye"));
+ 
+    test_suffix_print(helloWorld, 'd');
+ 
+    test_suffix_print(helloWorld, 'x');
+}
+```
+{% endtab %}
+
+{% tab title="contains" %}
+```cpp
+#include <iostream>
+#include <string_view>
+#include <string>
+ 
+template <typename SubstrType>
+void test_substring_print(const std::string& str, SubstrType subs)
+{
+    std::cout << '\'' << str << "' contains '" << subs << "': " <<
+        str.contains(subs) << '\n';
+}
+ 
+int main()
+{
+    std::boolalpha(std::cout);    
+    auto helloWorld = std::string("hello world");
+ 
+    test_substring_print(helloWorld, std::string_view("hello"));
+ 
+    test_substring_print(helloWorld, std::string_view("goodbye"));
+ 
+    test_substring_print(helloWorld, 'w');
+ 
+    test_substring_print(helloWorld, 'x');
+}
+```
+{% endtab %}
+{% endtabs %}
+
+### Replace
+
+{% tabs %}
+{% tab title="" %}
+```
+
+```
+{% endtab %}
+
+{% tab title="Code" %}
+```cpp
+#include <cassert>
+#include <cstddef>
+#include <iostream>
+#include <string>
+#include <string_view>
+ 
+std::size_t replace_all(std::string& inout, std::string_view what, std::string_view with);
+std::size_t remove_all(std::string& inout, std::string_view what);
+void test_replace_remove_all();
+ 
+int main()
+{
+    std::string str{"The quick brown fox jumps over the lazy dog."};
+ 
+    str.replace(10, 5, "red"); // (5)
+ 
+    str.replace(str.begin(), str.begin() + 3, 1, 'A'); // (6)
+ 
+    std::cout << str << "\n\n";
+ 
+    test_replace_remove_all();
+}
+ 
+ 
+std::size_t replace_all(std::string& inout, std::string_view what, std::string_view with)
+{
+    std::size_t count{};
+    for (std::string::size_type pos{};
+         inout.npos != (pos = inout.find(what.data(), pos, what.length()));
+         pos += with.length(), ++count) {
+        inout.replace(pos, what.length(), with.data(), with.length());
+    }
+    return count;
+}
+ 
+std::size_t remove_all(std::string& inout, std::string_view what) {
+    return replace_all(inout, what, "");
+}
+ 
+void test_replace_remove_all()
+{
+    std::string str2{"ftp: ftpftp: ftp:"};
+    std::cout << "#1 " << str2 << '\n';
+ 
+    auto count = replace_all(str2, "ftp", "http");
+    assert(count == 4);
+    std::cout << "#2 " << str2 << '\n';
+ 
+    count = replace_all(str2, "ftp", "http");
+    assert(count == 0);
+    std::cout << "#3 " << str2 << '\n';
+ 
+    count = remove_all(str2, "http");
+    assert(count == 4);
+    std::cout << "#4 " << str2 << '\n';
+}
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+#### Parameters
+
+| pos | - | start of the substring that is going to be replaced |
+| :--- | :--- | :--- |
+| count | - | length of the substring that is going to be replaced |
+| first, last | - | range of characters that is going to be replaced |
+| str | - | string to use for replacement |
+| pos2 | - | start of the substring to replace with |
+| count2 | - | number of characters to replace with |
+| cstr | - | pointer to the character string to use for replacement |
+| ch | - | character value to use for replacement |
+| first2, last2 | - | range of characters to use for replacement |
+| ilist | - | initializer list with the characters to use for replacement |
+| t | - | object \(convertible to [std::basic\_string\_view](https://en.cppreference.com/w/cpp/string/basic_string_view)\) with the characters to use for replacement |
+
+#### Return value
+
+\*this.
+
+#### Exceptions
+
+* [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if `pos > length()` or `pos2 > str.length()`
+* [std::length\_error](https://en.cppreference.com/w/cpp/error/length_error) if the resulting string will exceed maximum possible string length \([max\_size\(\)](https://en.cppreference.com/w/cpp/string/basic_string/max_size)\)
+
+In any case, if an exception is thrown for any reason, this function has no effect \(strong exception guarantee\). \(since C++11\)
+{% endtab %}
+{% endtabs %}
+
+### substr
+
+{% tabs %}
+{% tab title="First Tab" %}
+```cpp
+#include <string>
+#include <iostream>
+ 
+int main()
+{
+    std::string a = "0123456789abcdefghij";
+ 
+    // count is npos, returns [pos, size())
+    std::string sub1 = a.substr(10);
+    std::cout << sub1 << '\n';
+ 
+    // both pos and pos+count are within bounds, returns [pos, pos+count)
+    std::string sub2 = a.substr(5, 3);
+    std::cout << sub2 << '\n';
+ 
+    // pos is within bounds, pos+count is not, returns [pos, size()) 
+    std::string sub4 = a.substr(a.size()-3, 50);
+    // this is effectively equivalent to
+    // std::string sub4 = a.substr(17, 3);
+    // since a.size() == 20, pos == a.size()-3 == 17, and a.size()-pos == 3
+ 
+    std::cout << sub4 << '\n';
+ 
+    try {
+        // pos is out of bounds, throws
+        std::string sub5 = a.substr(a.size()+3, 50);
+        std::cout << sub5 << '\n';
+    } catch(const std::out_of_range& e) {
+        std::cout << "pos exceeds string size\n";
+    }
+}
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+Returns a substring `[pos, pos+count)`. If the requested substring extends past the end of the string, i.e. the `count` is greater than size\(\) - pos \(e.g. if count == npos\), the returned substring is `[pos,` [`size()`](https://en.cppreference.com/w/cpp/string/basic_string/size)`)`.
+
+#### Parameters
+
+| pos | - | position of the first character to include |
+| :--- | :--- | :--- |
+| count | - | length of the substring |
+
+#### Return value
+
+String containing the substring `[pos, pos+count)` or `[pos,` [`size()`](https://en.cppreference.com/w/cpp/string/basic_string/size)`)`.
+
+#### Exceptions
+
+[std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if `pos >` [`size()`](https://en.cppreference.com/w/cpp/string/basic_string/size)
+
+#### Complexity
+
+Linear in `count`
+
+#### Notes
+
+The returned string is constructed as if by basic\_string\(data\(\)+pos, count\), which implies that the returned string's allocator will be default-constructed — the new allocator might not be a copy of `this->`[`get_allocator()`](https://en.cppreference.com/w/cpp/string/basic_string/get_allocator).
+
+| basic\_string substr\( size\_type pos = 0, size\_type count = npos \) const; |  | \(until C++20\) |
+| :--- | :--- | :--- |
+| constexpr basic\_string substr\( size\_type pos = 0, size\_type count = npos \) const; |  | \(since C++20\) |
+{% endtab %}
+{% endtabs %}
+
+### Copy
+
+{% tabs %}
+{% tab title="First Tab" %}
+```cpp
+#include <string>
+#include <iostream>
+
+int main()
+{
+    std::string foo("quuuux");
+    char bar[7]{};
+    foo.copy(bar, sizeof bar,2);
+    std::cout << bar << '\n';
+}
+
+//uuux
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+
+| size\_type copy\( CharT\* dest, size\_type count, size\_type pos = 0 \) const; |  | \(until C++20\) |
+| :--- | :--- | :--- |
+| constexpr size\_type copy\( CharT\* dest, size\_type count, size\_type pos = 0 \) const; |  | \(since C++20\) |
+|  |  |  |
+
+Copies a substring `[pos, pos+count)` to character string pointed to by `dest`. If the requested substring lasts past the end of the string, or if count == npos, the copied substring is `[pos, size())`. The resulting character string is not null-terminated.
+
+If pos &gt; size\(\), [std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) is thrown.
+
+#### Parameters
+
+| dest | - | pointer to the destination character string |
+| :--- | :--- | :--- |
+| count | - | length of the substring |
+| pos | - | position of the first character to include |
+
+#### Return value
+
+number of characters copied
+
+#### Exceptions
+
+[std::out\_of\_range](https://en.cppreference.com/w/cpp/error/out_of_range) if pos &gt; size\(\).
+
+#### Complexity
+
+linear in `count`
+{% endtab %}
+{% endtabs %}
+
+### Resize
+
+{% tabs %}
+{% tab title="First Tab" %}
+Resizes the string to contain `count` characters.
+
+If the current size is less than `count`, additional characters are appended.
+
+If the current size is greater than `count`, the string is reduced to its first `count` elements.
+
+The first version initializes new characters to CharT\(\), the second version initializes new characters to `ch`.
+
+```text
+    const unsigned  desired_length(8);
+    string     long_string( "Where is the end?" );
+    string     short_string( "Ha" );
+    
+// Shorten
+ long_string.resize( desired_length );
+  
+// Lengthen
+ short_string.resize( desired_length, 'a' );
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+
+{% endtab %}
+
+{% tab title="" %}
+
+
+| void resize\( size\_type count \); | \(until C++20\) |  |
+| :--- | :--- | :--- |
+| constexpr void resize\( size\_type count \); | \(since C++20\) |  |
+|  | \(2\) |  |
+| void resize\( size\_type count, CharT ch \); | \(until C++20\) |  |
+| constexpr void resize\( size\_type count, CharT ch \); | \(since C++20\) |  |
+|  |  |  |
+
+Resizes the string to contain `count` characters.
+
+If the current size is less than `count`, additional characters are appended.
+
+If the current size is greater than `count`, the string is reduced to its first `count` elements.
+
+The first version initializes new characters to CharT\(\), the second version initializes new characters to `ch`.
+
+#### Parameters
+
+| count | - | new size of the string |
+| :--- | :--- | :--- |
+| ch | - | character to initialize the new characters with |
+
+#### Return value
+
+\(none\)
+
+#### Exceptions
+
+[std::length\_error](https://en.cppreference.com/w/cpp/error/length_error) if count &gt; max\_size\(\). Any exceptions thrown by corresponding `Allocator`.
+
+If an exception is thrown for any reason, this function has no effect \(strong exception guarantee\). \(since C++11\)
+{% endtab %}
+{% endtabs %}
+
+
 
