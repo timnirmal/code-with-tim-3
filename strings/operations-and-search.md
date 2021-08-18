@@ -758,3 +758,215 @@ Appends additional characters to the string.1\) Appends `count` copies of charac
 {% endtab %}
 {% endtabs %}
 
+### Operator +=
+
+```cpp
+#include <iostream>
+#include <iomanip>
+#include <string>
+ 
+int main()
+{
+   std::string str;
+   str.reserve(50); //reserves sufficient storage space to avoid memory reallocation
+   std::cout << std::quoted(str) << '\n'; //empty string
+ 
+   str += "This";
+   std::cout << std::quoted(str) << '\n';
+ 
+   str += std::string(" is ");
+   std::cout << std::quoted(str) << '\n';
+ 
+   str += 'a';
+   std::cout << std::quoted(str) << '\n';
+ 
+   str += {' ','s','t','r','i','n','g','.'};
+   std::cout << std::quoted(str) << '\n';
+ 
+   str += 76.85; // equivalent to str += static_cast<char>(76.85), might not be the intent
+   std::cout << std::quoted(str) << '\n';
+}
+```
+
+Compare
+
+B
+
+{% tabs %}
+{% tab title="C++" %}
+```cpp
+#include <cassert>
+
+    // 1) Compare with other string
+    {
+        int compare_value{
+            std::string{"Batman"}.compare(std::string{"Superman"})
+        };
+        //Batman comes before Superman
+    }
+ 
+    // 2) Compare substring with other string
+    {
+        int compare_value{
+            std::string{"Batman"}.compare(3, 3, std::string{"Superman"})
+        };
+        std::cout << (
+            compare_value < 0 ? "man comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before man\n" :
+            "man and Superman are the same.\n"
+        );
+    }
+ 
+    // 3) Compare substring with other substring
+    {
+        std::string a{"Batman"};
+        std::string b{"Superman"};
+ 
+        int compare_value{a.compare(3, 3, b, 5, 3)};
+ 
+        std::cout << (
+            compare_value < 0 ? "man comes before man\n" :
+            compare_value > 0 ? "man comes before man\n" :
+            "man and man are the same.\n"
+        );
+        // Compare substring with other substring
+        // defaulting to end of other string
+        assert(compare_value == a.compare(3, 3, b, 5));
+    }
+ 
+    // 4) Compare with char pointer
+    {
+        int compare_value{std::string{"Batman"}.compare("Superman")};
+ 
+        std::cout << (
+            compare_value < 0 ? "Batman comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before Batman\n" :
+            "Superman and Batman are the same.\n"
+        );
+    }
+ 
+    // 5) Compare substring with char pointer
+    {
+        int compare_value{std::string{"Batman"}.compare(3, 3, "Superman")};
+ 
+        std::cout << (
+            compare_value < 0 ? "man comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before man\n" :
+            "man and Superman are the same.\n"
+        );
+    }
+ 
+    // 6) Compare substring with char pointer substring
+    {
+        int compare_value{std::string{"Batman"}.compare(0, 3, "Superman", 5)};
+ 
+        std::cout << (
+            compare_value < 0 ? "Bat comes before Super\n" :
+            compare_value > 0 ? "Super comes before Bat\n" :
+            "Super and Bat are the same.\n"
+        );
+    }
+}
+
+//Batman comes before Superman
+//Superman comes before man
+//man and man are the same.
+//Batman comes before Superman
+//Superman comes before man
+//Bat comes before Super
+```
+{% endtab %}
+
+{% tab title="Code" %}
+```cpp
+#include <cassert>
+#include <string>
+#include <iostream>
+ 
+int main() 
+{
+    // 1) Compare with other string
+    {
+        int compare_value{
+            std::string{"Batman"}.compare(std::string{"Superman"})
+        };
+        std::cout << (
+            compare_value < 0 ? "Batman comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before Batman\n" :
+            "Superman and Batman are the same.\n"
+        );
+    }
+ 
+    // 2) Compare substring with other string
+    {
+        int compare_value{
+            std::string{"Batman"}.compare(3, 3, std::string{"Superman"})
+        };
+        std::cout << (
+            compare_value < 0 ? "man comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before man\n" :
+            "man and Superman are the same.\n"
+        );
+    }
+ 
+    // 3) Compare substring with other substring
+    {
+        std::string a{"Batman"};
+        std::string b{"Superman"};
+ 
+        int compare_value{a.compare(3, 3, b, 5, 3)};
+ 
+        std::cout << (
+            compare_value < 0 ? "man comes before man\n" :
+            compare_value > 0 ? "man comes before man\n" :
+            "man and man are the same.\n"
+        );
+        // Compare substring with other substring
+        // defaulting to end of other string
+        assert(compare_value == a.compare(3, 3, b, 5));
+    }
+ 
+    // 4) Compare with char pointer
+    {
+        int compare_value{std::string{"Batman"}.compare("Superman")};
+ 
+        std::cout << (
+            compare_value < 0 ? "Batman comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before Batman\n" :
+            "Superman and Batman are the same.\n"
+        );
+    }
+ 
+    // 5) Compare substring with char pointer
+    {
+        int compare_value{std::string{"Batman"}.compare(3, 3, "Superman")};
+ 
+        std::cout << (
+            compare_value < 0 ? "man comes before Superman\n" :
+            compare_value > 0 ? "Superman comes before man\n" :
+            "man and Superman are the same.\n"
+        );
+    }
+ 
+    // 6) Compare substring with char pointer substring
+    {
+        int compare_value{std::string{"Batman"}.compare(0, 3, "Superman", 5)};
+ 
+        std::cout << (
+            compare_value < 0 ? "Bat comes before Super\n" :
+            compare_value > 0 ? "Super comes before Bat\n" :
+            "Super and Bat are the same.\n"
+        );
+    }
+}
+
+//Batman comes before Superman
+//Superman comes before man
+//man and man are the same.
+//Batman comes before Superman
+//Superman comes before man
+//Bat comes before Super
+```
+{% endtab %}
+{% endtabs %}
+
