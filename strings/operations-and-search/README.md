@@ -3,21 +3,21 @@
 | **Operations** |  |
 | :--- | :--- |
 | [clear](https://en.cppreference.com/w/cpp/string/basic_string/clear) | clears the contents |
-| [insert](https://en.cppreference.com/w/cpp/string/basic_string/insert) | inserts characters |
-| [erase](https://en.cppreference.com/w/cpp/string/basic_string/erase) | removes characters |
+| [insert](https://en.cppreference.com/w/cpp/string/basic_string/insert) | [inserts characters](./#insert) |
+| [erase](https://en.cppreference.com/w/cpp/string/basic_string/erase) | [removes characters](./#erase) |
 | [push\_back](https://en.cppreference.com/w/cpp/string/basic_string/push_back) | appends a character to the end |
 | [pop\_back](https://en.cppreference.com/w/cpp/string/basic_string/pop_back)\(C++11\) | removes the last character \(equal to `erase(end()-1)`\) |
-| [append](https://en.cppreference.com/w/cpp/string/basic_string/append) | appends characters to the end |
-| [operator+=](https://en.cppreference.com/w/cpp/string/basic_string/operator%2B%3D) | appends characters to the end |
-| [compare](https://en.cppreference.com/w/cpp/string/basic_string/compare) | compares two strings |
-| [starts\_with](https://en.cppreference.com/w/cpp/string/basic_string/starts_with)\(C++20\) | checks if the string starts with the given prefix |
+| [append](https://en.cppreference.com/w/cpp/string/basic_string/append) | [appends characters to the end](./#append) |
+| [operator+=](https://en.cppreference.com/w/cpp/string/basic_string/operator%2B%3D) | [appends characters to the end](./#operator) |
+| [compare](https://en.cppreference.com/w/cpp/string/basic_string/compare) | [compares two strings](./#compare) |
+| [starts\_with](https://en.cppreference.com/w/cpp/string/basic_string/starts_with)\(C++20\) | [checks if the string starts with the given prefix](./#start_with-end_with) |
 | [ends\_with](https://en.cppreference.com/w/cpp/string/basic_string/ends_with)\(C++20\) | checks if the string ends with the given suffix |
 | [contains](https://en.cppreference.com/w/cpp/string/basic_string/contains)\(C++23\) | checks if the string contains the given substring or character |
-| [replace](https://en.cppreference.com/w/cpp/string/basic_string/replace) | replaces specified portion of a string |
-| [substr](https://en.cppreference.com/w/cpp/string/basic_string/substr) | returns a substring |
-| [copy](https://en.cppreference.com/w/cpp/string/basic_string/copy) | copies characters |
-| [resize](https://en.cppreference.com/w/cpp/string/basic_string/resize) | changes the number of characters stored |
-| [swap](https://en.cppreference.com/w/cpp/string/basic_string/swap) | swaps the contents |
+| [replace](https://en.cppreference.com/w/cpp/string/basic_string/replace) | [replaces specified portion of a string](./#replace) |
+| [substr](https://en.cppreference.com/w/cpp/string/basic_string/substr) | [returns a substring](./#substr) |
+| [copy](https://en.cppreference.com/w/cpp/string/basic_string/copy) | [copies characters](./#copy) |
+| [resize](https://en.cppreference.com/w/cpp/string/basic_string/resize) | [changes the number of characters stored](./#resize) |
+| [swap](https://en.cppreference.com/w/cpp/string/basic_string/swap) | [swaps the contents](./#swap) |
 
 
 
