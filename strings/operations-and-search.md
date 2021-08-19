@@ -1422,5 +1422,81 @@ If an exception is thrown for any reason, this function has no effect \(strong e
 {% endtab %}
 {% endtabs %}
 
+ swap
+
+{% tabs %}
+{% tab title="First Tab" %}
+```text
+ std::string a = "AAA";
+ std::string b = "BBB";
  
+ a.swap(b);
+```
+{% endtab %}
+
+{% tab title="Second Tab" %}
+```text
+#include <string>
+#include <iostream>
+ 
+int main() 
+{
+    std::string a = "AAA";
+    std::string b = "BBB";
+ 
+    std::cout << "before swap" << '\n';
+    std::cout << "a: " << a << '\n';
+    std::cout << "b: " << b << '\n';
+ 
+    a.swap(b);
+ 
+    std::cout << "after swap" << '\n';
+    std::cout << "a: " << a << '\n';
+    std::cout << "b: " << b << '\n';
+}
+```
+
+Output:
+
+```text
+before swap
+a: AAA
+b: BBB
+after swap
+a: BBB
+b: AAA
+```
+{% endtab %}
+
+{% tab title="" %}
+| void swap\( basic\_string& other \); |  | \(until C++17\) |
+| :--- | :--- | :--- |
+| void swap\( basic\_string& other \) noexcept\(/\* see below \*/\); |  | \(since C++17\) \(until C++20\) |
+| constexpr void swap\( basic\_string& other \) noexcept\(/\* see below \*/\); |  | \(since C++20\) |
+|  |  |  |
+
+Exchanges the contents of the string with those of `other`. All iterators and references may be invalidated.
+
+| The behavior is undefined if `Allocator` does not propagate on swap and the allocators of `*this` and `other` are unequal. | \(since C++11\) |
+| :--- | :--- |
+
+
+#### Parameters
+
+| other | - | string to exchange the contents with |
+| :--- | :--- | :--- |
+
+
+#### Return value
+
+\(none\)
+
+#### Complexity
+
+Constant.
+
+| [noexcept](https://en.cppreference.com/w/cpp/language/noexcept_spec) specification:  noexcept\([std::allocator\_traits](http://en.cppreference.com/w/cpp/memory/allocator_traits)&lt;Allocator&gt;::propagate\_on\_container\_swap::value \|\| [std::allocator\_traits](http://en.cppreference.com/w/cpp/memory/allocator_traits)&lt;Allocator&gt;::is\_always\_equal::value\) |
+| :--- |
+{% endtab %}
+{% endtabs %}
 
