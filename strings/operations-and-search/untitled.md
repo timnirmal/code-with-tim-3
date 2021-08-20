@@ -1,6 +1,6 @@
-# Untitled
+# npos
 
-npos 
+## npos 
 
 npos means non-position and it is defined as 
 
@@ -30,6 +30,10 @@ int main()
     std::bitset<5> b("aaabb", std::string::npos, 'a', 'b');
     std::cout << b << '\n';
 }
+
+//no 'a' in 'test'
+//st
+//00011
 ```
 
 
