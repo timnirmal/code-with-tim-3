@@ -8,7 +8,7 @@ npos means non-position and it is defined as
 static const size_t npos = -1;
 ```
 
- It's returned by method `find` when the pattern was not found.
+ It's returned by method `find` when the pattern was not found. Use for indicate "all the way to the end".
 
 ```cpp
 #include <iostream>
