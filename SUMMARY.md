@@ -29,6 +29,7 @@
   * [Search](strings/operations-and-search/search.md)
   * [npos](strings/operations-and-search/untitled.md)
   * [Untitled](strings/operations-and-search/untitled-1.md)
+  * [Untitled](strings/operations-and-search/untitled-2.md)
 
 ## Libraries
 
