@@ -114,7 +114,105 @@
   </tbody>
 </table>
 
-## operator+ <a id="firstHeading"></a>
+## erase and erase if <a id="firstHeading"></a>
+
+{% tabs %}
+{% tab title="C++" %}
+```cpp
+  std::erase(cnt, '3');
+  
+  auto erased = std::erase_if(cnt, [](char x) { return (x - '0') % 2 == 0; });
+    print_container("Erase all even numbers:\n", cnt);
+//Return number of erased items
+```
+{% endtab %}
+
+{% tab title="" %}
+```cpp
+#include <iostream>
+#include <numeric>
+#include <string_view>
+#include <string>
+ 
+void print_container(std::string_view comment, const std::string& c)
+{
+    std::cout << comment;
+    for (auto x : c) {
+        std::cout << x << ' ';
+    }
+    std::cout << '\n';
+}
+ 
+int main()
+{
+    std::string cnt(10, ' ');
+    std::iota(cnt.begin(), cnt.end(), '0');
+    print_container("Init:\n", cnt);
+ 
+    std::erase(cnt, '3');
+    print_container("Erase '3':\n", cnt);
+ 
+    auto erased = std::erase_if(cnt, [](char x) { return (x - '0') % 2 == 0; });
+    print_container("Erase all even numbers:\n", cnt);
+    std::cout << "In all " << erased << " even numbers were erased.\n";
+}
+
+//OUTPUT
+
+//Init:
+//0 1 2 3 4 5 6 7 8 9 
+//Erase '3':
+//0 1 2 4 5 6 7 8 9 
+//Erase all even numbers:
+//1 5 7 9
+//In all 5 even numbers were erased.
+```
+{% endtab %}
+
+{% tab title="" %}
+#### Parameters
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">c</th>
+      <th style="text-align:left">-</th>
+      <th style="text-align:left">container from which to erase</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">value</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">value to be removed</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">pred</td>
+      <td style="text-align:left">-</td>
+      <td style="text-align:left">
+        <p>unary predicate which returns &#x200B;true if the element should be erased.
+          <br
+          />
+        </p>
+        <p>The expression pred(v) must be convertible to bool for every argument <code>v</code> of
+          type (possibly const) <code>CharT</code>, regardless of <a href="https://en.cppreference.com/w/cpp/language/value_category">value category</a>,
+          and must not modify <code>v</code>. Thus, a parameter type of CharT&amp;is
+          not allowed, nor is CharT unless for <code>CharT</code> a move is equivalent
+          to a copy (since C++11).&#x200B;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Return value
+
+The number of erased elements.
+
+#### Complexity
+
+Linear.
+{% endtab %}
+{% endtabs %}
 
 
 
