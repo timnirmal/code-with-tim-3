@@ -1435,7 +1435,7 @@ If an exception is thrown for any reason, this function has no effect \(strong e
 {% endtab %}
 
 {% tab title="Second Tab" %}
-```text
+```cpp
 #include <string>
 #include <iostream>
  
@@ -1497,6 +1497,8 @@ Constant.
 
 | [noexcept](https://en.cppreference.com/w/cpp/language/noexcept_spec) specification:  noexcept\([std::allocator\_traits](http://en.cppreference.com/w/cpp/memory/allocator_traits)&lt;Allocator&gt;::propagate\_on\_container\_swap::value \|\| [std::allocator\_traits](http://en.cppreference.com/w/cpp/memory/allocator_traits)&lt;Allocator&gt;::is\_always\_equal::value\) |
 | :--- |
+| [noexcept](https://en.cppreference.com/w/cpp/language/noexcept_spec) specification:  noexcept\(noexcept\(lhs.swap\(rhs\)\)\) |
+|  |
 {% endtab %}
 {% endtabs %}
 
